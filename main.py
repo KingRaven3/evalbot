@@ -1,6 +1,6 @@
 from pyrogram import Client , filters
 from pyrogram.types import Message 
-import sys , io
+import sys , io , os
 
 app =  Client(
     "eval",
