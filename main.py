@@ -93,6 +93,6 @@ async def sh(_,m):
                 document=out_file, caption=cmd, disable_notification=True
             )
     else:
-        await m.reply(final_output)
+        await m.reply(result)
 
 app.run()
