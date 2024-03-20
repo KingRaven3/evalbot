@@ -1,0 +1,38 @@
+name: evalbot
+
+on:
+    schedule:
+      - cron: "0 */5 * * *"
+    push:
+      branches: [ main ]
+#      paths:
+#        .github/workflows/tbot.yml
+        
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: git repo
+        uses: actions/checkout@v2
+       
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2.2.2
+        with:
+           python-version: 3.10
+
+      - name: run
+        env:
+         BOT_TOKEN: ${{BOT_TOKEN}}
+
+        run: |
+          pip install -r requirements.txt
+          python3 main.py
+         
+
