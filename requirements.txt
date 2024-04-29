@@ -2,3 +2,5 @@ pyrogram
 tgcrypto
 requests
 flask
+gunicorn==20.1.0
+aiohttp==3.8.1
